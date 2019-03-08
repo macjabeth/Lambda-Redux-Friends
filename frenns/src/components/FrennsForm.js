@@ -11,11 +11,11 @@ const FrennsForm = ({ addFrenn, editFrenn, location, history }) => {
 
   useEffect(() => {
     if (location.state) {
-      const { frenn } = location.state;
-      setId(frenn.id);
-      setName(frenn.name);
-      setAge(frenn.age);
-      setEmail(frenn.email);
+      const { id, name, age, email } = location.state;
+      setName(name);
+      setAge(age);
+      setEmail(email);
+      setId(id);
     }
   }, [location]);
 
@@ -33,30 +33,24 @@ const FrennsForm = ({ addFrenn, editFrenn, location, history }) => {
     setEmail('');
   };
 
+  const cta = id ? 'Update' : 'Submit';
+
   return (
     <form onSubmit={onFrennSubmit}>
       <input
         type="text"
-        name="name"
         placeholder="Name"
         value={name}
         onChange={updateName}
       />
-      <input
-        type="number"
-        name="age"
-        placeholder="Age"
-        value={age}
-        onChange={updateAge}
-      />
+      <input type="number" placeholder="Age" value={age} onChange={updateAge} />
       <input
         type="email"
-        name="email"
         placeholder="Email"
         value={email}
         onChange={updateEmail}
       />
-      <input type="submit" value="Submit" />
+      <input type="submit" value={cta} />
     </form>
   );
 };

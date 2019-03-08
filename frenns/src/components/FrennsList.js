@@ -25,7 +25,7 @@ const FrennsList = ({
           onFrennEdit={() => {
             history.replace({
               pathname: `${location.pathname}/new`,
-              state: { frenn }
+              state: { ...frenn }
             });
           }}
           onFrennDelete={() => deleteFrenn(frenn.id)}
