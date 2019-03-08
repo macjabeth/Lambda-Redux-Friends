@@ -8,7 +8,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       localStorage.getItem('userToken') ? (
         <Component {...props} />
       ) : (
-        <Redirect to="/login" />
+        <Redirect
+          to={{
+            pathname: '/login',
+            state: { referrer: props.match.path }
+          }}
+        />
       )
     }
   />

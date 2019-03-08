@@ -1,5 +1,5 @@
 {
-  "name": "friends",
+  "name": "frenns",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,6 +10,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {

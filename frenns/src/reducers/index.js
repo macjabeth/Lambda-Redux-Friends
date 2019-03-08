@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
-import friends from './friends';
+import frenns from './frenns';
+import error from './error';
 
 export default combineReducers({
-  friends
+  frenns,
+  error
 });

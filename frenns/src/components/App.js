@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, NavLink } from 'react-router-dom';
-import PrivateRoute from './containers/PrivateRoute';
+import PrivateRoute from './PrivateRoute';
 
-import Home from './components/Home';
-import Login from './components/Login';
-import FriendsList from './containers/FriendsList';
+import Login from './Login';
+import FrennsList from './FrennsList';
+import FrennsForm from './FrennsForm';
 
 const App = () => (
   <div>
@@ -14,13 +14,13 @@ const App = () => (
           Home
         </NavLink>
         <NavLink to="/login">Login</NavLink>
-        <NavLink to="/friends">Friends</NavLink>
+        <NavLink to="/frenns">Frenns</NavLink>
       </nav>
     </header>
     <main>
-      <Route exact path="/" component={Home} />
       <Route path="/login" component={Login} />
-      <PrivateRoute path="/friends" component={FriendsList} />
+      <PrivateRoute path="/frenns" component={FrennsList} />
+      <PrivateRoute path="/frenns/new" component={FrennsForm} />
     </main>
   </div>
 );

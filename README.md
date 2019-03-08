@@ -1,4 +1,4 @@
-# Redux Friends
+# Redux Frenns
 
 Topics:
 
@@ -19,19 +19,19 @@ Topics:
 - Take a look at the endpoints that our API has to offer in `server.js`.
 
   - **[POST]** \* to `/api/login`: returns a token to be added to the header of all other requests. Pass in the following credentials as the `body` of the request: `{ username: 'Lambda School', password: 'i<3Lambd4' }`
-  - **[GET]** to `/api/friends`: returns the list of friends.
-  - **[GET]** to `/api/friends/123`: returns the friend with the id passed as part of the URL (123 in example).
-  - **[POST]** to `/api/friends`: creates a friend and return the new list of friends. Pass the friend as the `body` of the request (the second argument passed to `axios.post`).
-  - **[PUT]** to `/api/friends/:id`: updates the friend using the `id` passed as part of the URL. Send the an object with the updated information as the `body` of the request (the second argument passed to `axios.put`).
-  - **[DELETE]** to `/api/friends/123`: removes the friend using the `id` passed as part of the URL (123 in example).
+  - **[GET]** to `/api/frenns`: returns the list of frenns.
+  - **[GET]** to `/api/frenns/123`: returns the frenn with the id passed as part of the URL (123 in example).
+  - **[POST]** to `/api/frenns`: creates a frenn and return the new list of frenns. Pass the frenn as the `body` of the request (the second argument passed to `axios.post`).
+  - **[PUT]** to `/api/frenns/:id`: updates the frenn using the `id` passed as part of the URL. Send the an object with the updated information as the `body` of the request (the second argument passed to `axios.put`).
+  - **[DELETE]** to `/api/frenns/123`: removes the frenn using the `id` passed as part of the URL (123 in example).
 
 ## Initialize Project
 
 - Run `yarn` or `npm i` inside the root directory of this project to install dependencies.
 - Run `yarn start` or `npm start` to start the API server.
-- Run `create-react-app friends` in a separate terminal window in the root directory of the project to create your starter application.
-- `cd` into the _friends_ folder and type `yarn add redux react-redux redux-thunk redux-logger axios react-router-dom` which will install the needed dependencies.
-- To start out, create a reducer that will be passed as the rootReducer to `createStore`. Start with a pretty simple initialState object that has a `friends` property set as an empty array. Your state tree will grow pretty large as you build out more and more actions.
+- Run `create-react-app frenns` in a separate terminal window in the root directory of the project to create your starter application.
+- `cd` into the _frenns_ folder and type `yarn add redux react-redux redux-thunk redux-logger axios react-router-dom` which will install the needed dependencies.
+- To start out, create a reducer that will be passed as the rootReducer to `createStore`. Start with a pretty simple initialState object that has a `frenns` property set as an empty array. Your state tree will grow pretty large as you build out more and more actions.
 - Don't forget to hook up the store using the `Provider` tag inside of `src/index.js`, passing it your root reducer.
 - You will need to use `redux-thunk` as a middleware inside of `src/index.js`. You'll want to be sure to pass it to `applyMiddleware()` then feed it into your createStore function.
 - If you so choose, include `redux-logger` to your middleware. You're going to have plenty of action creators that will consume our API so you'll get plenty of actions triggered.
@@ -40,10 +40,10 @@ Topics:
 
 - Add a route for a login page and build out a simple login form with username and password inputs and a submit button (design this however you would like).
 - The login action creator should dispatch a "logging in" action, return the promise created by `axios.post`, then save the returned token to localStorage. You can connect your Login component, and show a spinner on your form or in your button while the login request is happening.
-- When the request returns, use the history object in your Login component to navigate your user to your FriendsList route
+- When the request returns, use the history object in your Login component to navigate your user to your FrennsList route
 - Create a `<PrivateRoute />` component to protect your other routes. It should check localStorage for a token, and redirect the user to your login route if there is not a token.
-- Create a protected route for your friends list. Remember, if the user isn't logged in, navigating to this protected route will redirect them to the login page.
-- In your FriendsList component, rendered with `<ProtectedRoute />`, you will create a list of your friends that you get from the API using React and Redux.
+- Create a protected route for your frenns list. Remember, if the user isn't logged in, navigating to this protected route will redirect them to the login page.
+- In your FrennsList component, rendered with `<ProtectedRoute />`, you will create a list of your frenns that you get from the API using React and Redux.
 
 ## Root Reducer and our State Tree
 
@@ -51,19 +51,19 @@ Topics:
 
 ```js
 {
-  deletingFriend: false,
-  fetchingFriends: false,
-  friends: [],
+  deletingFrenn: false,
+  fetchingFrenns: false,
+  frenns: [],
   loggingIn: false,
-  savingFriends: false,
-  updatingFriend: false,
+  savingFrenns: false,
+  updatingFrenn: false,
   error: null
 }
 ```
 
 - This is a pretty large state tree, but each field is extremely simple.
 - All of your items in your state tree represent a make up of actions that you're going to make asynchronously. Think about your application and the state you need. This root reducer object will represent that state.
-- Each `friend` item that is in the `friends` array should have the following format:
+- Each `frenn` item that is in the `frenns` array should have the following format:
 
 ```js
 {
@@ -81,6 +81,6 @@ Topics:
 
 ## Stretch Problem
 
-- In the requirements for this project, we implemented a login POST operation, a GET operation, and a "add friend" POST operation. Add two more actions, one for making a PUT request, and the other for making a DELETE request.
-- Style the friends list and the input field and make everything look nice.
-- Expand the number of properties that you put on each friend object. Feel free to remove the dummy data on the server or modify it in any way.
+- In the requirements for this project, we implemented a login POST operation, a GET operation, and a "add frenn" POST operation. Add two more actions, one for making a PUT request, and the other for making a DELETE request.
+- Style the frenns list and the input field and make everything look nice.
+- Expand the number of properties that you put on each frenn object. Feel free to remove the dummy data on the server or modify it in any way.

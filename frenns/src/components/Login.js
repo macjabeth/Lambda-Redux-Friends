@@ -10,7 +10,7 @@ const Login = ({ onLoginSubmit, history, location }) => {
   const onSubmit = e => {
     e.preventDefault();
     onLoginSubmit({ username, password }).then(() => {
-      const route = location.state.from || '/';
+      const route = location.state.referrer || '/';
       history.push(route);
     });
   };
