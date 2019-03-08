@@ -1,15 +1,11 @@
 import axios from 'axios';
 
-const url = 'http://localhost:5000/api';
-
 const axiosWithAuth = () => {
   const token = localStorage.getItem('userToken');
 
   return axios.create({
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `${token}`
-    }
+    baseURL: 'http://localhost:5000/api',
+    headers: { Authorization: token }
   });
 };
 
@@ -19,7 +15,7 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const onLoginSubmit = creds => dispatch => {
   dispatch({ type: LOGIN_START });
   return axios
-    .post(`${url}/login`, creds)
+    .post('/login', creds)
     .then(({ data: { payload } }) => dispatch({ type: LOGIN_SUCCESS, payload }))
     .catch(err => dispatch({ type: LOGIN_FAILURE, payload: err }));
 };
@@ -30,7 +26,7 @@ export const FETCH_FRENNS_FAILURE = 'FETCH_FRENNS_FAILURE';
 export const fetchFrenns = () => dispatch => {
   dispatch({ type: FETCH_FRENNS_START });
   axiosWithAuth()
-    .get(`${url}/frenns`)
+    .get('/frenns')
     .then(({ data }) => dispatch({ type: FETCH_FRENNS_SUCCESS, payload: data }))
     .catch(err => dispatch({ type: FETCH_FRENNS_FAILURE, payload: err }));
 };
@@ -41,7 +37,7 @@ export const ADD_FRENN_FAILURE = 'ADD_FRENN_FAILURE';
 export const addFrenn = newFrenn => dispatch => {
   dispatch({ type: ADD_FRENN_START });
   axiosWithAuth()
-    .post(`${url}/frenns`, newFrenn)
+    .post('/frenns', newFrenn)
     .then(({ data }) => dispatch({ type: ADD_FRENN_SUCCESS, payload: data }))
     .catch(err => dispatch({ type: ADD_FRENN_FAILURE, payload: err }));
 };
@@ -52,7 +48,7 @@ export const EDIT_FRENN_FAILURE = 'EDIT_FRENN_FAILURE';
 export const editFrenn = (id, updatedFrenn) => dispatch => {
   dispatch({ type: EDIT_FRENN_START });
   return axiosWithAuth()
-    .put(`${url}/frenns/${id}`, updatedFrenn)
+    .put(`/frenns/${id}`, updatedFrenn)
     .then(({ data }) => dispatch({ type: EDIT_FRENN_SUCCESS, payload: data }))
     .catch(err => dispatch({ type: EDIT_FRENN_FAILURE, payload: err }));
 };
@@ -63,7 +59,7 @@ export const DELETE_FRENN_FAILURE = 'DELETE_FRENN_FAILURE';
 export const deleteFrenn = id => dispatch => {
   dispatch({ type: DELETE_FRENN_START });
   axiosWithAuth()
-    .delete(`${url}/frenns/${id}`)
+    .delete(`/frenns/${id}`)
     .then(({ data }) => dispatch({ type: DELETE_FRENN_SUCCESS, payload: data }))
     .catch(err => dispatch({ type: DELETE_FRENN_FAILURE, payload: err }));
 };

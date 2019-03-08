@@ -3,15 +3,14 @@ import { connect } from 'react-redux';
 import { onLoginSubmit } from '../actions';
 import { useInput } from '../hooks';
 
-const Login = ({ onLoginSubmit, history, location }) => {
-  const [username, updateUsername] = useInput();
-  const [password, updatePassword] = useInput();
+const Login = ({ onLoginSubmit, history: { push }, location: { state } }) => {
+  const [username, , updateUsername] = useInput();
+  const [password, , updatePassword] = useInput();
 
   const onSubmit = e => {
     e.preventDefault();
     onLoginSubmit({ username, password }).then(() => {
-      const route = location.state.referrer || '/';
-      history.push(route);
+      push((state && state.referrer) || '/');
     });
   };
 
