@@ -1,46 +1,45 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const uuidv4 = require('uuid/v4');
 const port = 5000;
 const app = express();
 const token =
-  'eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ';
+  'esfeyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NUIhkufemQifQ';
 
-let nextId = 6;
-
-let friends = [
+let frenns = [
   {
-    id: 1,
+    id: uuidv4(),
     name: 'Ben',
     age: 30,
     email: 'ben@lambdaschool.com'
   },
   {
-    id: 2,
+    id: uuidv4(),
     name: 'Austen',
     age: 45,
     email: 'austen@lambdaschool.com'
   },
   {
-    id: 3,
+    id: uuidv4(),
     name: 'Ryan',
     age: 15,
     email: 'ryan@lambdaschool.com'
   },
   {
-    id: 4,
+    id: uuidv4(),
     name: 'Dustin',
     age: 25,
     email: 'D-munny@lambdaschool.com'
   },
   {
-    id: 5,
+    id: uuidv4(),
     name: 'Sean',
     age: 35,
     email: 'sean@lambdaschool.com'
   },
   {
-    id: 6,
+    id: uuidv4(),
     name: 'Michelle',
     age: 67,
     email: 'michelle@gmail.com'
@@ -74,60 +73,56 @@ app.post('/api/login', (req, res) => {
   }
 });
 
-app.get('/api/friends', authenticator, (req, res) => {
+app.get('/api/frenns', authenticator, (req, res) => {
   setTimeout(() => {
-    res.send(friends);
+    res.send(frenns);
   }, 1000);
 });
 
-app.get('/api/friends/:id', authenticator, (req, res) => {
-  const friend = friends.find(f => f.id == req.params.id);
+app.get('/api/frenns/:id', authenticator, (req, res) => {
+  const frenn = frenns.find(f => f.id == req.params.id);
 
-  if (friend) {
-    res.status(200).json(friend);
+  if (frenn) {
+    res.status(200).json(frenn);
   } else {
-    res.status(404).send({ msg: 'Friend not found' });
+    res.status(404).send({ msg: 'Frenn not found' });
   }
 });
 
-app.post('/api/friends', authenticator, (req, res) => {
-  const friend = { id: getNextId(), ...req.body };
+app.post('/api/frenns', authenticator, (req, res) => {
+  const frenn = { id: uuidv4(), ...req.body };
 
-  friends = [...friends, friend];
+  frenns = [...frenns, frenn];
 
-  res.send(friends);
+  res.send(frenns);
 });
 
-app.put('/api/friends/:id', authenticator, (req, res) => {
+app.put('/api/frenns/:id', authenticator, (req, res) => {
   const { id } = req.params;
 
-  const friendIndex = friends.findIndex(f => f.id == id);
+  const frennIndex = frenns.findIndex(f => f.id == id);
 
-  if (friendIndex > -1) {
-    const friend = { ...friends[friendIndex], ...req.body };
+  if (frennIndex > -1) {
+    const frenn = { ...frenns[frennIndex], ...req.body };
 
-    friends = [
-      ...friends.slice(0, friendIndex),
-      friend,
-      ...friends.slice(friendIndex + 1)
+    frenns = [
+      ...frenns.slice(0, frennIndex),
+      frenn,
+      ...frenns.slice(frennIndex + 1)
     ];
-    res.send(friends);
+    res.send(frenns);
   } else {
-    res.status(404).send({ msg: 'Friend not found' });
+    res.status(404).send({ msg: 'Frenn not found' });
   }
 });
 
-app.delete('/api/friends/:id', authenticator, (req, res) => {
+app.delete('/api/frenns/:id', authenticator, (req, res) => {
   const { id } = req.params;
 
-  friends = friends.filter(f => f.id !== Number(id));
+  frenns = frenns.filter(f => f.id !== id);
 
-  res.send(friends);
+  res.send(frenns);
 });
-
-function getNextId() {
-  return nextId++;
-}
 
 app.listen(port, () => {
   console.log(`server listening on port ${port}`);
